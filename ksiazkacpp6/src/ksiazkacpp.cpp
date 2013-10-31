@@ -55,6 +55,8 @@ int main() {
 
 	std::cout << "git test ala ma kota" << std::endl;
 
+	g();
+
 //	v_initializer_test();
 
 	return 0;
