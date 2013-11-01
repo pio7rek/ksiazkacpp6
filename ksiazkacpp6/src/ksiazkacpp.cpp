@@ -10,6 +10,8 @@
 #include "rozdzial1/Vector.h"
 #include "rozdzial3/Container.h"
 #include "rozdzial3/Vectorcontainer.h"
+#include "rozdzial3/Shape.h"
+#include <vector>
 
 void use(piot::Container& c) {
 	const int sz = c.size();
@@ -41,6 +43,13 @@ void v_initializer_test() {
 	std::cout << std::endl;
 
 }
+
+void rotate_all(vector<piot::Shape*>& vec, int angle) {
+	for (auto p : vec) {
+		p->rotate(angle);
+	}
+}
+
 
 /*piot::Vector read(istream& is) {
 	piot::Vector v;
