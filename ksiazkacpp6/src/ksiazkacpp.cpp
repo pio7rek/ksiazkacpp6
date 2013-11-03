@@ -44,7 +44,7 @@ void v_initializer_test() {
 
 }
 
-void rotate_all(vector<piot::Shape*>& vec, int angle) {
+void rotate_all(std::vector<piot::Shape*>& vec, int angle) {
 	for (auto p : vec) {
 		p->rotate(angle);
 	}

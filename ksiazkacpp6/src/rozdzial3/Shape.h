@@ -10,6 +10,8 @@
 
 #include "Point.h"
 
+namespace piot {
+
 class Shape {
 public:
 	virtual piot::Point center() const = 0;
@@ -19,6 +21,6 @@ public:
 	virtual ~Shape() {};
 };
 
-
+} /* namespace piot */
 
 #endif /* SHAPE_H_ */
