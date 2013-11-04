@@ -13,11 +13,12 @@
 
 namespace piot {
 
-class Circle : public Shape {
+class Circle : public piot::Shape {
 public:
 	Circle(Point, int);
 	~Circle();
 	Point center() const;
+	void move(Point);
 	void draw() const;
 	void rotate(int);
 private:

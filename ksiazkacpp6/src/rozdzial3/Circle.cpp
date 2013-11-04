@@ -18,6 +18,10 @@ Point Circle::center() const {
 	return x;
 }
 
+void Circle::move(Point to) {
+	x=to;
+}
+
 void Circle::draw() const {
 }
 

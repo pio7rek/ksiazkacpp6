@@ -18,6 +18,9 @@ public:
 	Vector(std::initializer_list<double>);
 	virtual ~Vector();
 
+	Vector(const Vector& a);
+	Vector& operator=(const Vector& a);
+
 	double& operator[](int);
 	int size() const;
 /*	void push_back(double);*/

@@ -13,6 +13,11 @@
 #include "rozdzial3/Shape.h"
 #include <vector>
 
+void bad_copy() {
+	piot::Vector v1(5), v2(5);
+	v1 = v2;
+}
+
 void use(piot::Container& c) {
 	const int sz = c.size();
 	for ( int i=0; i!=sz; ++i) {
@@ -59,14 +64,21 @@ void rotate_all(std::vector<piot::Shape*>& vec, int angle) {
 	return v;
 }*/
 
+piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
+	/*if (a.size() != b.size()) {
+		throw Vector_size_mismatch{};
+	}*/
+	piot::Vector res(a.size());
+	for (int i=0; i!=a.size(); ++i) {
+		res[i] = a[i] + b[i];
+	}
+	return res;
+}
+
 int main() {
 	std::cout << "hello!" << std::endl;
 
-	std::cout << "git test ala ma kota" << std::endl;
-
-	g();
-
-//	v_initializer_test();
+	//bad_copy();
 
 	return 0;
 }
