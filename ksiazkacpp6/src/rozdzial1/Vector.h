@@ -18,10 +18,13 @@ public:
 	Vector(std::initializer_list<double>);
 	virtual ~Vector();
 
-	Vector(const Vector& a);
-	Vector& operator=(const Vector& a);
+	Vector(const Vector& a);			//copy constructor
+	Vector& operator=(const Vector& a);	//copy
 
-	double& operator[](int);
+	Vector(Vector&& a);					//move constructor
+//	Vector& operator=(Vector&& a);		//move
+
+	double& operator[](int) const;
 	int size() const;
 /*	void push_back(double);*/
 

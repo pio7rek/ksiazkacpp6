@@ -31,7 +31,14 @@ Vector::~Vector() {
 	delete[] elem;
 }
 
-double& Vector::operator[](int i) {
+Vector::Vector(Vector&& a)
+: elem{a.elem}
+, sz{a.sz} {
+	a.elem = nullptr;
+	a.sz = 0;
+}
+
+double& Vector::operator[](int i) const {
 	return elem[i];
 }
 
