@@ -19,10 +19,10 @@ public:
 	virtual void draw() const = 0;
 	virtual void rotate(int angle) = 0;
 	virtual ~Shape() {};
-	Shape(const Shape&) =delete;
+/*	Shape(const Shape&) =delete;
 	Shape& operator=(const Shape&) =delete;
 	Shape(Shape&&) =delete;
-	Shape& operator=(Shape&&) =delete;
+	Shape& operator=(Shape&&) =delete;*/
 };
 
 } /* namespace piot */

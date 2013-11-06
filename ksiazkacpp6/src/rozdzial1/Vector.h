@@ -5,8 +5,8 @@
  *      Author: piot
  */
 
-#ifndef VECTOR_H_
-#define VECTOR_H_
+#ifndef VECTOR_PIOT_H_
+#define VECTOR_PIOT_H_
 
 #include <initializer_list>
 
@@ -35,4 +35,4 @@ private:
 
 } /* namespace piot */
 
-#endif /* VECTOR_H_ */
+#endif /* VECTOR_PIOT_H_ */

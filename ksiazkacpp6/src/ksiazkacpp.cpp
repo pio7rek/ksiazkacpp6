@@ -7,11 +7,26 @@
 
 #include <iostream>
 #include <istream>
+#include "rozdzial3/Vector.h"
 #include "rozdzial1/Vector.h"
 #include "rozdzial3/Container.h"
 #include "rozdzial3/Vectorcontainer.h"
 #include "rozdzial3/Shape.h"
 #include <vector>
+
+
+
+/*void write2(const piot3::Vector<std::string> vs) {
+	for (auto& s : vs) {
+		std::cout << s << std::endl;
+	}
+}*/
+
+void write(const piot3::Vector<std::string>& vs) {
+	for (int i = 0; i!=vs.size(); ++i) {
+		std::cout << vs.operator [](i) << std::endl;
+	}
+}
 
 void bad_copy() {
 	piot::Vector v1(5), v2(5);
@@ -77,6 +92,14 @@ piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
 
 int main() {
 	std::cout << "hello!" << std::endl;
+
+	//piot3::Vector<std::string> v(5);
+/*	v[0]="ala";
+	v[1]="ma";
+	v[2]="kota";
+	v[3]="ktorego";
+	v[4]="lubi";*/
+	//write(v);
 
 	//bad_copy();
 
