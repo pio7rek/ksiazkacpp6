@@ -13,7 +13,55 @@
 #include "rozdzial3/Vectorcontainer.h"
 #include "rozdzial3/Shape.h"
 #include <vector>
+#include <list>
 
+template<typename T>
+class Less_than {
+	const T val;
+public:
+	Less_than(const T& v) : val(v) { }
+	bool operator()(const T& x) const { return x<val; }
+};
+
+template<typename C, typename P>
+int count(const C& c, P pred) {
+	int cnt = 0;
+	for (const auto& x : c) {
+		if (pred(x)) {
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
+void fcnt(const std::vector<int>& vec, const std::list<std::string>& lst, int x,
+		const std::string& s) {
+	std::cout << "liczba wartosci mniejszych od " << x
+			<< ": " << count(vec, Less_than<int>{x})
+			<< std::endl;
+	std::cout << "liczba wartosci mnijszych od " << s
+			<< ": " << count(lst, Less_than<std::string>{s})
+			<< std::endl;
+}
+
+void fct(int n, const std::string& s) {
+	Less_than<int> lti{42};
+	Less_than<std::string> lts{"Backus"};
+	bool b1 = lti(n);
+	bool b2 = lts(s);
+
+	std::cout << n << " jest mniejsze od 42 " << b1 << std::endl;
+	std::cout << s << " jest mniejsze od \"Backus\" " << b2 << std::endl;
+
+}
+
+template<typename Container, typename Value>
+Value suma(const Container& c, Value v) {
+	for (auto x : c) {
+		v+=c;
+	}
+	return v;
+}
 
 
 /*void write2(const piot3::Vector<std::string> vs) {
@@ -22,11 +70,11 @@
 	}
 }*/
 
-void write(const piot3::Vector<std::string>& vs) {
+/*void write(const piot3::Vector<std::string>& vs) {
 	for (int i = 0; i!=vs.size(); ++i) {
 		std::cout << vs.operator [](i) << std::endl;
 	}
-}
+}*/
 
 void bad_copy() {
 	piot::Vector v1(5), v2(5);
@@ -92,17 +140,9 @@ piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
 
 int main() {
 	std::cout << "hello!" << std::endl;
-
-	//piot3::Vector<std::string> v(5);
-/*	v[0]="ala";
-	v[1]="ma";
-	v[2]="kota";
-	v[3]="ktorego";
-	v[4]="lubi";*/
-	//write(v);
-
-	//bad_copy();
-
+	std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
+	std::list<std::string> s{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+	fcnt(v, s, 6, "e");
 	return 0;
 }
 
