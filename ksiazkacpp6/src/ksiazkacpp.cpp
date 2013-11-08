@@ -14,6 +14,8 @@
 #include "rozdzial3/Shape.h"
 #include <vector>
 #include <list>
+#include <memory>
+
 
 template<typename T>
 class Less_than {
@@ -62,6 +64,49 @@ Value suma(const Container& c, Value v) {
 	}
 	return v;
 }
+
+
+//dla kazdego obiektu wskazanego przez wskaŸniki z pojemnika C wykonaj operacje Oper (Oper to funktor)
+template<class C, class Oper>
+void for_all(C& c, Oper op) { //zak³adamy ¿e C jest pojemnikiem wskaŸników
+	for(auto& x : c) {
+		op(*x); //u¿ywa op() na referencji wskazywanych obiektów z pojemnika C
+	}
+}
+
+template<typename T>
+void gg(T t) {
+	std::cout << t << ' ';
+}
+
+void ff() { }
+
+template<typename T, typename... Tail>
+void ff(T head, Tail... tail) {
+	gg(head);
+	ff(tail...);
+}
+
+template<typename C>
+using Element_type = typename C::value_type;
+
+template<typename Container>
+void algo(Container& c) {
+	std::vector<Element_type<Container>> vec;
+	//...
+}
+
+
+
+
+/*void user() {
+	std::vector<std::unique_ptr<piot::Shape>> v;
+	while(std::cin) {
+		v.push_back(read_shape(std::cin));
+		for_all(v, [](piot::Shape s){s.draw(); });
+		for_all(v, [](piot::Shape s){s.rotate(45); })
+	}
+}*/
 
 
 /*void write2(const piot3::Vector<std::string> vs) {
@@ -139,10 +184,17 @@ piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
 }
 
 int main() {
-	std::cout << "hello!" << std::endl;
-	std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
+
+	std::cout << "first: ";
+	ff(1, 2.2, "hello", 5);
+	std::cout << "\nsecond: ";
+	ff(0.2, 'c', "yuck!", 0, 1, 2);
+	std::cout << std::endl;
+
+	/*std::cout << "hello!" << std::endl;
+	std::vector<int> v{1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10};
 	std::list<std::string> s{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
-	fcnt(v, s, 6, "e");
+	fcnt(v, s, 6, "e");*/
 	return 0;
 }
 
