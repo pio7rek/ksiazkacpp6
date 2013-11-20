@@ -15,7 +15,20 @@
 #include <vector>
 #include <list>
 #include <memory>
+#include <string>
 
+void r4m3() {
+	std::string imie = "Polomski Piotr";
+
+	std::string s = imie.substr(9, 5);
+	imie.replace(0, 8, "polomski");
+	imie[0] = std::toupper(imie[0]);
+}
+
+void r4respond(const std::string& answer) {
+	if (answer == "No") { }
+	else if (answer == "Yes") { }
+}
 
 template<typename T>
 class Less_than {
@@ -163,6 +176,14 @@ void rotate_all(std::vector<piot::Shape*>& vec, int angle) {
 	}
 }
 
+struct Entry {
+	std::string name;
+	int number;
+};
+
+std::ostream& operator<<(std::ostream& os, const Entry& e) {
+	return os << "{\"" << e.name << "\", " << e.number << "}";
+}
 
 /*piot::Vector read(istream& is) {
 	piot::Vector v;
@@ -183,14 +204,33 @@ piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
 	return res;
 }
 
+
+template<typename T>
+class Vec : public std::vector<T> {
+public:
+	using std::vector<T>::vector;
+	T& operator[](int i) {
+		return vector<T>::at(i);
+	}
+	const T& operator[](int i) {
+		return vector<T>::at(i);
+	}
+};
+
+
 int main() {
 
-	std::cout << "first: ";
+
+	Entry entry;
+	entry.name = "Piotrek";
+	entry.number = 444;
+	std::cout << entry << std::endl;
+
+	/*std::cout << "first: ";
 	ff(1, 2.2, "hello", 5);
 	std::cout << "\nsecond: ";
 	ff(0.2, 'c', "yuck!", 0, 1, 2);
-	std::cout << std::endl;
-
+	std::cout << std::endl;*/
 	/*std::cout << "hello!" << std::endl;
 	std::vector<int> v{1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10};
 	std::list<std::string> s{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
