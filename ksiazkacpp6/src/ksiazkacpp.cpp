@@ -16,6 +16,7 @@
 #include <list>
 #include <memory>
 #include <string>
+#include <algorithm>
 
 void r4m3() {
 	std::string imie = "Polomski Piotr";
@@ -176,14 +177,6 @@ void rotate_all(std::vector<piot::Shape*>& vec, int angle) {
 	}
 }
 
-struct Entry {
-	std::string name;
-	int number;
-};
-
-std::ostream& operator<<(std::ostream& os, const Entry& e) {
-	return os << "{\"" << e.name << "\", " << e.number << "}";
-}
 
 /*piot::Vector read(istream& is) {
 	piot::Vector v;
@@ -204,27 +197,102 @@ piot::Vector operator+(const piot::Vector& a, const piot::Vector& b) {
 	return res;
 }
 
+namespace piot4_5 {
+	struct Entry {
+		std::string name;
+		int number;
+	};
 
-template<typename T>
-class Vec : public std::vector<T> {
-public:
-	using std::vector<T>::vector;
-	T& operator[](int i) {
-		return vector<T>::at(i);
+	std::ostream& operator<<(std::ostream& os, const Entry& e) {
+		return os << "{\"" << e.name << "\", " << e.number << "}";
 	}
-	const T& operator[](int i) {
-		return vector<T>::at(i);
+
+	bool operator==(const Entry& x, const Entry& y) {
+		return (x.name == y.name && x.number == y.number);
 	}
-};
+
+	bool operator<(const Entry& x, const Entry& y) {
+		return x.name < y.name;
+	}
+
+	void f(std::vector<Entry>& vec, std::list<Entry>& lst) {
+		std::sort(vec.begin(), vec.end());
+		std::unique_copy(vec.begin(), vec.end(), lst.begin());
+	}
+
+	std::list<Entry> f(std::vector<Entry>& vec) {
+		std::list<Entry> res;
+		std::sort(vec.begin(), vec.end());
+		std::unique_copy(vec.begin(), vec.end(), std::back_inserter(res));
+		return res;
+	}
+
+	bool has_c(const std::string& s, char c) {
+		return std::find(s.begin(), s.end(), c) != s.end();
+	}
+
+/*	std::vector<std::string::iterator> find_all(std::string& s, char c) {
+		std::vector<std::string::iterator> res;
+		for (auto p=s.begin(); p!=s.end(); ++p) {
+			if (*p == c) {
+				res.push_back(p);
+			}
+		}
+		return res;
+	}*/
+
+	template <typename T> using Invoke = typename T::type;
+
+	template<typename T>
+	using Iterator = typename T::iterator;
+
+	template<typename C, typename V>
+	std::vector<Iterator<C>> find_all(C& c, V v) {
+		std::vector<Iterator<C>> res;
+		for (auto p=c.begin(); p!=c.end(); ++p) {
+			if (*p==v) {
+				res.push_back(p);
+			}
+		}
+		return res;
+	}
+
+
+	void test() {
+		std::string m{"Mary had a little lamb"};
+		for (auto p : find_all(m, 'x')) {
+			if (*p!='x') {
+				std::cerr << "a buggy bug!\n";
+			}
+		}
+		std::cout << "test 1 \n";
+
+		std::list<double> ld{1.1, 2.2, 3.3, 4.4, 1.1};
+		for (auto p :find_all(ld, 1.1)) {
+			if (*p!=1.1) {
+				std::cerr << "omg omg blad!\n";
+			}
+		}
+		std::cout << "test 2 \n";
+
+		std::vector<std::string> vs{"red", "blue", "green", "green", "orange", "green"};
+		for (auto p : find_all(vs, "green")) {
+			if (*p!="green") {
+				std::cerr << "blad!\n";
+			}
+		}
+		std::cout << "test 3 \n";
+
+		for (auto p : find_all(vs, "green")) {
+			std::cout << *p << std::endl;
+		}
+	}
+}
 
 
 int main() {
 
-
-	Entry entry;
-	entry.name = "Piotrek";
-	entry.number = 444;
-	std::cout << entry << std::endl;
+	piot4_5::test();
 
 	/*std::cout << "first: ";
 	ff(1, 2.2, "hello", 5);
