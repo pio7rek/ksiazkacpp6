@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <istream>
+#include <ostream>
 #include "rozdzial3/Vector.h"
 #include "rozdzial1/Vector.h"
 #include "rozdzial3/Container.h"
@@ -17,6 +18,9 @@
 #include <memory>
 #include <string>
 #include <algorithm>
+#include <iterator>
+#include <utility>
+#include <map>
 
 void r4m3() {
 	std::string imie = "Polomski Piotr";
@@ -287,12 +291,25 @@ namespace piot4_5 {
 			std::cout << *p << std::endl;
 		}
 	}
+
+	struct Greater_than {
+	     int val;
+	     Greater_than(int v) : val{v} { }
+	     bool operator()(const std::pair<std::string,int>& r) { return r.second>val; }
+	};
+
+	void ff(std::map<std::string, int>& m) {
+		//auto p = std::find_if(m.begin(), m.end(), Greater_than{42});
+		int cxx = std::count_if(m.begin(), m.end(), [](const std::pair<std::string, int>& r){return r.second>42;});
+	}
+
+
 }
 
 
 int main() {
 
-	piot4_5::test();
+
 
 	/*std::cout << "first: ";
 	ff(1, 2.2, "hello", 5);
