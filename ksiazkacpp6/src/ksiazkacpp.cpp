@@ -13,6 +13,7 @@
 #include "rozdzial3/Container.h"
 #include "rozdzial3/Vectorcontainer.h"
 #include "rozdzial3/Shape.h"
+#include "rozdzial05/rozdzial05.h"
 #include <vector>
 #include <list>
 #include <memory>
@@ -301,6 +302,8 @@ namespace piot4_5 {
 	void ff(std::map<std::string, int>& m) {
 		//auto p = std::find_if(m.begin(), m.end(), Greater_than{42});
 		int cxx = std::count_if(m.begin(), m.end(), [](const std::pair<std::string, int>& r){return r.second>42;});
+		++cxx;
+		--cxx;
 	}
 
 
@@ -309,6 +312,7 @@ namespace piot4_5 {
 
 int main() {
 
+	r05::test1();
 
 
 	/*std::cout << "first: ";
