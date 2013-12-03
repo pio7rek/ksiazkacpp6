@@ -7,11 +7,20 @@
 #ifndef ROZDZIAL05_H_
 #define ROZDZIAL05_H_
 
-#include <iostream>
 #include <thread>
 #include <vector>
 #include <functional>
 #include <type_traits>
+#include <mutex>
+#include <chrono>
+#include <forward_list>
+#include <algorithm>
+#include <iterator>
+#include <typeinfo>
+#include <type_traits>
+#include <iostream>
+#include <regex>
+
 
 namespace r05 {
 
@@ -44,10 +53,78 @@ void test1() {
 	//t1.join();
 	t2.join();
 
-	std::cout << res1 << ' ' << res2 << '\n';
+	//std::cout << res1 << ' ' << res2 << '\n';
 }
 
+std::mutex m;
+int sh;
+void f3() {
+	std::unique_lock<std::mutex> lck {m};
+	sh +=7;
+}
+void f4() {
+	using namespace std::chrono;
+	auto t0 = high_resolution_clock::now();
+	r05::test1();
+	auto t1 = high_resolution_clock::now();
+	std::cout << duration_cast<milliseconds>(t1-t0).count() << "msec\n";
+}
 
+/*template<typename Ran>
+void sort_helper(Ran beg, Ran end, std::random_access_iterator_tag) {
+	std::sort(beg, end);
+}
+
+template<typename For>
+void sort_helper(For beg, For end, std::forward_iterator_tag) {
+	std::vector<decltype(*beg)> v {beg, end};
+	std::sort(v.begin(), v.end());
+	copy(v.begin(), v.end(), beg);
+}
+
+template<typename C>
+using Iterator_type = typename C::iterator;
+
+template<typename Iter>
+using Iterator_category = typename std::iterator_traits<Iter>::iterator_category;
+
+template<typename C>
+void sort(C& c) {
+	using Iter = std::Iterator_type<C>;
+	sort_helper(c.begin(), c.end(), std::Iterator_category<Iter>{});
+}
+
+void test5421(std::vector<std::string>& v, std::forward_list<int>& lst) {
+	std::sort(v);
+	std::sort(lst);
+}*/
+
+template<typename T>
+constexpr bool Is_arithmetic() {
+	return std::is_arithmetic<T>::value;
+}
+
+template<typename Scalar>
+class complex {
+	Scalar re, im;
+public:
+	static_assert(Is_arithmetic<Scalar>(), "Sorry, I only support complex of "
+			"arithmetic types");
+};
+
+void f5422() {
+	bool b1 = Is_arithmetic<int>();
+	bool b2 = Is_arithmetic<std::string>();
+
+	std::cout << "b1: " << b1 << " b2: " << b2 << std::endl;
+}
+
+complex<int> i;
+//complex<std::string> s;
+void test55() {
+	std::regex pat (R"(\w{2}\s*\d{5}(-\d{4})?)");
+	std::cout << "pattern: " << pat << '\n';
+}
 
 }
 #endif /* ROZDZIAL05_H_ */
