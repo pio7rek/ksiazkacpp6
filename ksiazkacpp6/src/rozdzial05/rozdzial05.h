@@ -20,7 +20,9 @@
 #include <type_traits>
 #include <iostream>
 #include <regex>
-
+#include <numeric>
+#include <list>
+#include <random>
 
 namespace r05 {
 
@@ -123,8 +125,46 @@ complex<int> i;
 //complex<std::string> s;
 void test55() {
 	std::regex pat (R"(\w{2}\s*\d{5}(-\d{4})?)");
-	std::cout << "pattern: " << pat << '\n';
+	int lineno = 0;
+	for (std::string line; getline(std::cin, line);) {
+		++lineno;
+		std::smatch matches;
+		if (std::regex_search(line, matches,pat)) {
+			std::cout << lineno << ": " << matches[0] << '\n';
+		}
+	}
 }
+
+void f561() {
+	std::list<double>lst {1, 2, 3, 4, 5, 9999.99999};
+	auto s = std::accumulate(lst.begin(), lst.end(), 0.0);
+	std::cout << s << '\n';
+}
+
+class Rand_int {
+public:
+	Rand_int(int low, int high) :dist{low, high} { }
+	int operator()() { return dist(re); }
+private:
+	std::default_random_engine re;
+	std::uniform_int_distribution<> dist;
+};
+
+void f563() {
+	Rand_int rnd {0,9};
+	std::vector<int> histogram(10);
+	for (unsigned int i=0; i!=1000; ++i) {
+		++histogram[rnd()];
+	}
+	for (unsigned int i=0; i!=histogram.size(); ++i) {
+		std::cout << i << '\t';
+		for (int j=0; j!=histogram[i]; ++j) {
+			std::cout << '*';
+		}
+		std::cout << std::endl;
+	}
+}
+
 
 }
 #endif /* ROZDZIAL05_H_ */
