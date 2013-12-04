@@ -14,6 +14,7 @@
 #include "rozdzial3/Vectorcontainer.h"
 #include "rozdzial3/Shape.h"
 #include "rozdzial05/rozdzial05.h"
+#include "rozdzial06/rozdzial06.h"
 #include <vector>
 #include <list>
 #include <memory>
@@ -309,10 +310,8 @@ namespace piot4_5 {
 
 }
 
-
 int main() {
-
-	r05::f563();
+	r06::intval();
 
 
 	/*std::cout << "first: ";
