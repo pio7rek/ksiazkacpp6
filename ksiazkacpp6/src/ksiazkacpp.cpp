@@ -311,7 +311,8 @@ namespace piot4_5 {
 }
 
 int main() {
-	r06::intval();
+
+	r06::f_aligment();
 
 
 	/*std::cout << "first: ";
