@@ -82,5 +82,42 @@ void f_aligment() {
 			  << "alignment of Foo : "        << alignof(Foo)   << '\n' ;
 
 }
+
+void f_init() {
+	int a1 {5};
+	int a2 = {5};
+	int a3 = 5;
+    int a4 (5);
+}
+
+void f_init_2(double val, int val2) {
+	int x2 = val;
+	char c2 {val2};
+	int x3 {val};
+	char c4 {24};
+	char c5 {264};
+	int x4 {2.0};
+}
+
+template<typename T>
+class Matrix {
+	T operator()(int i, int j) {
+		T x;
+		return x;
+	}
+	int rows() { return 4; }
+	int cols() { return 4; }
+};
+
+template<class T, class U>
+auto operator+(const Matrix<T>& a, const Matrix<U>& b) -> Matrix<decltype(T{}+U{})> {
+	Matrix<decltype(T{}+U{})> res;
+	for (int i=0; i!=a.rows(); ++i) {
+		for (int j=0; j!=a.cols(); ++j) {
+			res(i,j) += a(i,j) +b(i,j);
+		}
+	}
+}
+
 }
 #endif /* ROZDZIAL06_H_ */

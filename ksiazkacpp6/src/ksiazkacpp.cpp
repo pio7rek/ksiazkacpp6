@@ -312,7 +312,7 @@ namespace piot4_5 {
 
 int main() {
 
-	r06::f_aligment();
+	r06::f_init_2(7.0, 1025);
 
 
 	/*std::cout << "first: ";
